@@ -47,7 +47,7 @@
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.16 0 0);
-  --muted: oklch(0.97 0 0);
+  --muted: oklch(0.955 0 0);
   --muted-foreground: oklch(0.5 0 0);
   --accent: oklch(0.68 0.17 33);
   --accent-foreground: oklch(1 0 0);
@@ -94,7 +94,7 @@
 
 @utility placeholder-hatch {
   background-color: var(--muted);
-  background-image: repeating-linear-gradient(135deg, transparent 0 14px, oklch(0 0 0 / 4%) 14px 15px);
+  background-image: repeating-linear-gradient(135deg, transparent 0 14px, oklch(0 0 0 / 7%) 14px 15px);
 }
 
 @utility reveal {

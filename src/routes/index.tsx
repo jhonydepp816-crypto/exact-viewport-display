@@ -60,7 +60,7 @@ function SectionHead({ index, label, title, sub }: { index: string; label: strin
 
 function PortraitPlaceholder({ className = "", note = "Replace with Jhony's photo" }: { className?: string; note?: string }) {
   return (
-    <div className={`placeholder-hatch relative flex items-end overflow-hidden rounded-sm ${className}`} role="img" aria-label="Portrait placeholder">
+    <div className={`placeholder-hatch relative flex border items-end overflow-hidden rounded-sm ${className}`} role="img" aria-label="Portrait placeholder">
       <span className="display pointer-events-none absolute -right-4 top-4 text-[9rem] text-foreground/5">J</span>
       <p className="label m-5 text-muted-foreground">{note}</p>
     </div>
@@ -112,7 +112,7 @@ function Hero() {
           <p className="label reveal mb-8 flex items-center gap-3 text-muted-foreground">
             <span className="size-2 rounded-full bg-accent" aria-hidden /> Available for new projects
           </p>
-          <h1 className="display reveal text-[clamp(2.4rem,12.5vw,11.5rem)]">
+          <h1 className="display reveal text-[clamp(2.4rem,12.5vw,11.5rem)] lg:text-[min(8.6vw,10rem)]">
             Building<br />Digital<br />Experiences<span className="text-accent">.</span>
           </h1>
         </div>
