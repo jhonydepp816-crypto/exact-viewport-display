@@ -58,11 +58,10 @@ function SectionHead({ index, label, title, sub }: { index: string; label: strin
   );
 }
 
-function PortraitPlaceholder({ className = "", note = "Replace with Jhony's photo" }: { className?: string; note?: string }) {
+function Portrait({ src, alt, className = "", position = "center" }: { src: string; alt: string; className?: string; position?: string }) {
   return (
-    <div className={`placeholder-hatch relative flex border items-end overflow-hidden rounded-sm ${className}`} role="img" aria-label="Portrait placeholder">
-      <span className="display pointer-events-none absolute -right-4 top-4 text-[9rem] text-foreground/5">J</span>
-      <p className="label m-5 text-muted-foreground">{note}</p>
+    <div className={`relative overflow-hidden rounded-sm bg-muted ${className}`}>
+      <img src={src} alt={alt} className="h-full w-full object-cover" style={{ objectPosition: position }} />
     </div>
   );
 }
@@ -117,7 +116,7 @@ function Hero() {
           </h1>
         </div>
         <div className="flex flex-col justify-end gap-8 lg:col-span-4">
-          <PortraitPlaceholder className="img-reveal aspect-[4/5] w-full max-w-sm lg:max-w-none" />
+          <Portrait src={site.photos.hero} alt="Portrait of Jhony, Web Developer" position="60% 30%" className="img-reveal aspect-[4/5] w-full max-w-sm lg:max-w-none" />
         </div>
       </div>
       <div className="mt-14 grid gap-8 border-t pt-8 md:grid-cols-12">
@@ -139,7 +138,7 @@ function About() {
     <section id="about" className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32">
       <SectionHead index="01" label="About me" title="Hi, I'm Jhony." />
       <div className="grid gap-12 md:grid-cols-12">
-        <PortraitPlaceholder className="img-reveal aspect-[3/4] md:col-span-4" />
+        <Portrait src={site.photos.about} alt="Jhony standing in a black suit" position="56% 60%" className="img-reveal aspect-[3/4] md:col-span-4" />
         <div className="md:col-span-7 md:col-start-6">
           <p className="reveal text-2xl leading-snug md:text-4xl md:leading-tight">
             I'm a Web Developer focused on creating modern, responsive, and professional websites. I combine clean development, thoughtful design, and modern tools to create digital experiences that are <span className="text-accent">functional and visually strong.</span>
@@ -203,20 +202,23 @@ function Works() {
           const layout = ["md:col-span-8", "md:col-span-4 md:mt-40", "md:col-span-5", "md:col-span-7 md:mt-24"][i];
           return (
             <article key={p.title} className={`group ${layout}`}>
-              <a href={p.href} className="block overflow-hidden rounded-sm bg-muted" aria-label={`View project: ${p.title}`}>
+              <div className="relative block overflow-hidden rounded-sm bg-muted">
+                <span className="label absolute left-4 top-4 z-10 rounded-sm bg-background px-3 py-1.5">{p.tag}</span>
                 <img src={p.image} alt={`${p.title} project preview`} width={p.w} height={p.h} loading="lazy"
                   className="img-reveal h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-              </a>
+              </div>
               <div className="mt-6 grid grid-cols-12 gap-4 border-t pt-5">
-                <p className="label col-span-12 text-accent sm:col-span-3">Project {pad(i + 1)}</p>
+                <p className="label col-span-12 text-accent sm:col-span-3">Project {pad(i + 1)}<span className="block mt-1 text-muted-foreground">{p.tag}</span></p>
                 <div className="col-span-12 sm:col-span-9">
                   <h3 className="text-2xl font-bold uppercase tracking-tight md:text-3xl">{p.title}</h3>
                   <p className="mt-2 text-muted-foreground">{p.text}</p>
                   <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
                     <p className="label text-muted-foreground">{p.tech}</p>
-                    <a href={p.href} className="label inline-flex items-center gap-2 border-b border-foreground pb-1 transition-colors hover:border-accent hover:text-accent">
-                      View project <ArrowUpRight className="size-4" aria-hidden />
-                    </a>
+                    {p.href && (
+                      <a href={p.href} target="_blank" rel="noopener noreferrer" className="label inline-flex items-center gap-2 border-b border-foreground pb-1 transition-colors hover:border-accent hover:text-accent">
+                        View project <ArrowUpRight className="size-4" aria-hidden />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -301,7 +303,14 @@ function FinalCta() {
 
 function Contact() {
   const [sent, setSent] = useState(false);
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => { e.preventDefault(); setSent(true); e.currentTarget.reset(); };
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const f = new FormData(e.currentTarget);
+    const subject = `New project: ${f.get("type")} — ${f.get("name")}`;
+    const body = `Name: ${f.get("name")}\nEmail: ${f.get("email")}\nProject type: ${f.get("type")}\n\n${f.get("message")}`;
+    window.location.href = `mailto:${site.contact[0].value}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setSent(true);
+  };
   const field = "w-full border-0 border-b border-input bg-transparent py-3 text-lg outline-none transition-colors focus:border-accent placeholder:text-muted-foreground/60";
   return (
     <section id="contact" className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32">
@@ -326,14 +335,14 @@ function Contact() {
             <button type="submit" className="label group inline-flex min-h-12 items-center gap-3 rounded-sm bg-primary px-8 text-primary-foreground transition-colors hover:bg-accent">
               Send message <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
             </button>
-            {sent && <p role="status" className="text-sm text-accent">Thanks! Your message has been noted.</p>}
+            {sent && <p role="status" className="text-sm text-accent">Your email app is opening with your message ready to send.</p>}
           </div>
         </form>
         <ul className="reveal md:col-span-4 md:col-start-9">
           {site.contact.map((c) => (
             <li key={c.label} className="border-t py-5 last:border-b">
               <p className="label text-muted-foreground">{c.label}</p>
-              <a href={c.href} className="mt-1 inline-block text-lg transition-colors hover:text-accent">{c.value}</a>
+              <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="mt-1 inline-block text-lg transition-colors hover:text-accent">{c.value}</a>
             </li>
           ))}
         </ul>
@@ -358,7 +367,7 @@ function Footer() {
           </nav>
           <div className="md:col-span-3">
             <p className="label mb-4 text-accent">Social</p>
-            {site.contact.slice(1).map((c) => <a key={c.label} href={c.href} className="block py-1 text-ink-muted transition-colors hover:text-ink-foreground">{c.label}</a>)}
+            {site.contact.slice(1).map((c) => <a key={c.label} href={c.href} target="_blank" rel="noopener noreferrer" className="block py-1 text-ink-muted transition-colors hover:text-ink-foreground">{c.label}</a>)}
           </div>
         </div>
         <div className="label mt-20 flex flex-wrap justify-between gap-4 border-t border-ink-border pt-6 text-ink-muted">

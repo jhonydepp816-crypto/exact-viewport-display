@@ -3,21 +3,23 @@ import p1 from "@/assets/project-1.jpg";
 import p2 from "@/assets/project-2.jpg";
 import p3 from "@/assets/project-3.jpg";
 import p4 from "@/assets/project-4.jpg";
+import portrait from "@/assets/jhony-portrait.jpg.asset.json";
+import full from "@/assets/jhony-full.jpg.asset.json";
 
 export const site = {
   name: "Jhony",
   title: "Web Developer",
+  photos: { hero: portrait.url, about: full.url },
   stats: [
-    { value: "XX+", label: "Projects" },
-    { value: "XX+", label: "Clients" },
-    { value: "X", label: "Years Experience" },
+    { value: "20+", label: "Projects" },
+    { value: "18", label: "Clients" },
+    { value: "4", label: "Years Experience" },
   ],
   contact: [
-    { label: "Email", value: "your@email.com", href: "mailto:your@email.com" },
-    { label: "WhatsApp", value: "+00 00 0000-0000", href: "#" },
-    { label: "GitHub", value: "github.com/username", href: "#" },
-    { label: "Instagram", value: "@username", href: "#" },
-    { label: "LinkedIn", value: "linkedin.com/in/username", href: "#" },
+    { label: "Email", value: "jhonydepp816@gmail.com", href: "mailto:jhonydepp816@gmail.com" },
+    { label: "WhatsApp", value: "0895-4022-07109", href: "https://wa.me/62895402207109" },
+    { label: "GitHub", value: "github.com/jhonydepp816", href: "https://github.com/jhonydepp816" },
+    { label: "Instagram", value: "@jhonnyawan_", href: "https://instagram.com/jhonnyawan_" },
   ],
 };
 
@@ -50,10 +52,10 @@ export const experience = [
 ];
 
 export const projects = [
-  { title: "Business Website", text: "A clean, editorial website presenting a business, its services and featured work.", tech: "HTML · CSS · JavaScript", image: p1, w: 1600, h: 1008, href: "#" },
-  { title: "Personal Portfolio", text: "A bold, typographic portfolio designed to look sharp on every screen.", tech: "React · Tailwind CSS", image: p2, w: 1008, h: 1200, href: "#" },
-  { title: "Landing Page", text: "A focused landing page built around one clear call to action.", tech: "HTML · CSS · JavaScript", image: p3, w: 1008, h: 1200, href: "#" },
-  { title: "E-Commerce Website", text: "A modern storefront with a calm, product-first shopping experience.", tech: "React · Tailwind CSS", image: p4, w: 1600, h: 1008, href: "#" },
+  { title: "Business Website", text: "A clean, editorial website presenting a business, its services and featured work.", tech: "HTML · CSS · JavaScript", image: p1, w: 1600, h: 1008, href: "", tag: "Concept Project" },
+  { title: "Personal Portfolio", text: "A bold, typographic portfolio designed to look sharp on every screen.", tech: "React · Tailwind CSS", image: p2, w: 1008, h: 1200, href: "", tag: "Concept Project" },
+  { title: "Landing Page", text: "A focused landing page built around one clear call to action.", tech: "HTML · CSS · JavaScript", image: p3, w: 1008, h: 1200, href: "", tag: "Concept Project" },
+  { title: "E-Commerce Website", text: "A modern storefront with a calm, product-first shopping experience.", tech: "React · Tailwind CSS", image: p4, w: 1600, h: 1008, href: "", tag: "Concept Project" },
 ];
 
 export const reasons = [
