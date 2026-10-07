@@ -108,11 +108,11 @@ function Hero() {
   return (
     <section id="top" className="relative mx-auto max-w-[1440px] px-5 pb-20 pt-28 md:px-10 md:pt-36">
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-        <div className="lg:col-span-8">
+        <div className="min-w-0 lg:col-span-8">
           <p className="label reveal mb-8 flex items-center gap-3 text-muted-foreground">
             <span className="size-2 rounded-full bg-accent" aria-hidden /> Available for new projects
           </p>
-          <h1 className="display reveal text-[clamp(3.5rem,13vw,11.5rem)]">
+          <h1 className="display reveal text-[clamp(2.4rem,12.5vw,11.5rem)]">
             Building<br />Digital<br />Experiences<span className="text-accent">.</span>
           </h1>
         </div>
@@ -286,7 +286,7 @@ function FinalCta() {
     <section className="bg-ink text-ink-foreground">
       <div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36">
         <p className="label reveal mb-10 text-accent">Have a project in mind?</p>
-        <h2 className="display reveal text-[clamp(3rem,11vw,10rem)]">Let's build<br />something great<span className="text-accent">.</span></h2>
+        <h2 className="display reveal text-[clamp(2.2rem,11vw,10rem)]">Let's build<br />something great<span className="text-accent">.</span></h2>
         <div className="mt-14 grid gap-8 border-t border-ink-border pt-8 md:grid-cols-2">
           <p className="reveal max-w-md text-lg text-ink-muted">Have a website project in mind? Let's turn your idea into a professional digital experience.</p>
           <div className="reveal flex flex-wrap gap-3 md:justify-end">
