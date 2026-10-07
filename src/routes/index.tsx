@@ -146,8 +146,8 @@ function About() {
           </p>
           <dl className="reveal mt-14 grid grid-cols-3 border-t pt-8">
             {site.stats.map((s) => (
-              <div key={s.label}>
-                <dt className="label order-2 mt-2 text-muted-foreground">{s.label}</dt>
+              <div key={s.label} className="flex flex-col-reverse">
+                <dt className="label mt-2 text-muted-foreground">{s.label}</dt>
                 <dd className="font-display text-4xl font-extrabold tracking-tight md:text-6xl">{s.value}</dd>
               </div>
             ))}
